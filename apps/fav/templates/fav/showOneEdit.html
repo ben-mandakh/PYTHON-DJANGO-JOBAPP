@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .container{
+            margin-top: 25px;
+        }
+        .container a{
+            margin-left: 550px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        h3{
+            /* margin-left: 0px; */
+            display: inline-block;
+            vertical-align: top;
+        }
+        .left{
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 155px;
+        }
+        .right{
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 250px;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <h3>
+                Welcome, {{user.first_name}}
+            </h3>
+            <a href="/logout">Logout</a> <br>
+            {% if messages %}
+                <p style="color: red"   {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endif %}
+        </div> <hr>
+        <div class="main">
+            <div class="left">
+                {{ % if user.id ==  % }}
+                
+                <form action="/show/id/edit" method="POST">
+                <h2><input type="text" value="{{book.title }}" name="titleUpdate"></h2> <br>
+                <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}  </p>
+                <p>Added on: {{ book.created_at }}</p>
+                <p>Last updated on: {{book.updated_at }}</p>
+                <p>Description: <input type="text" value="{{book.description }}" name="descUpdate" ></p>
+                <button>Update</button> | <a href="/shows/{{book.id}}/delete">Delete</a>
+                </form>
+                {{ % else % }}
+                
+                {{% endif %}}
+            </div>
+
+            <div class="right">
+                <h3>Users Who Like This Book</h3> <br>
+                {% for one_book in books %}
+                <ul>
+                    <li> {{one_book.uploaded_by.first_name}} {{one_book.uploaded_by.last_name}}</li>
+                </ul>
+                {% endfor %}
+                <br>
+                <a href="/success">Add to Favorites</a>
+            </div>
+        </div>
+        
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
